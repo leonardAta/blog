@@ -59,7 +59,7 @@
 
 	} */
 
-		function addCategory($dbconn, $add) {
+	function addCategory($dbconn, $add) {
 		$stmt = $dbconn->prepare("INSERT INTO Category(category_name) VALUES(:c)");
 		$stmt->bindParam(":c", $add['category_name']);
 
@@ -97,6 +97,7 @@
 			$result .= '<td><a href="editpost.php?post_id='.$row['post_id'].'">edit</a></td>';
 			$result .= '<td><a href="deletepost.php?post_id='.$row['post_id'].'">delete</a></td></tr>';
 		}
+		return $result;
 	}
 
 
@@ -117,6 +118,50 @@
 		return $data;
 	}
 
+	function fetchCategory($dbconn, $catName) {
+		$result = "";
+
+		$stmt = $dbconn->prepare("SELECT * FROM Category");
+		$stmt->execute();
+
+		while($row=$stmt->fetch(PDO::FETCH_BOTH)) {
+			$cat_id = $row['category_id'];
+			$cat_name = $row['category_name'];
+
+			if($cat_name == $catName) {
+				continue;
+			}
+			$result .= "<option value='$cat_id'>$cat_name</option>";
+
+		}
+	return $result;	
+
+
+	}
+
+	function getPostByID($dbconn, $pid) {
+		$stmt = $dbconn->prepare("SELECT * FROM Post WHERE post_id=:bid");
+		$stmt->bindParam(":bid", $pid);
+
+		$stmt->execute();
+		$row = $stmt->fetch(PDO::FETCH_BOTH);
+
+		return $row;
+
+
+	}
+
+	function getCategoryByID($dbconn, $cat_id) {
+
+		$stmt = $dbconn->prepare("SELECT * FROM Category WHERE category_id=:cid");
+		$stmt->bindParam(":cid", $cat_id);
+		$stmt->execute();
+
+		$row = $stmt->fetch(PDO::FETCH_BOTH);
+
+		return $row;
+
+	}
 
 
 

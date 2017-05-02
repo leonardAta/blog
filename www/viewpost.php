@@ -20,6 +20,7 @@
 			<table id="tab">
 				<thead>
 					<tr>
+						<th>Post ID</th>
 						<th>Title</th>
 						<th>Content</th>
 						<th>Date Added</th>
