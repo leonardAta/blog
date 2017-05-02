@@ -1,46 +1,129 @@
-<?php 
+<?php
+	ob_start();
+	session_start();
 
-	#include page title
+	#add page title
 	$page_title = "Add Post";
 
-	#include database
-	include 'includes/db.php';
+	# load db connection
+	include 'includes/db.php';	
+
+	# include functions
+	include 'includes/functions.php';
 
 	#include header
-	#include 'includes/header.php';
+	include 'includes/dashboard_header.php';
 
-	#include functions
-	#include 'includes/functions.php'; 
+	#track errors
+	$errors = [];
 
+	#max file size
+	define("MAX_FILE_SIZE", "2097152");
+
+	#permitted image extensions
+	$ext = ["image/jpeg", "image/jpg", "image/png"];
+
+	if(array_key_exists('add', $_POST)) {
+
+
+		if(empty($_POST['Title'])) {
+			$errors['Title'] = "Enter Title";
+		}
+		if(empty($_POST['Content'])) {
+			$errors['Content'] = "Enter Content";
+		}
+	
+
+		if(empty($_POST['Date'])) {
+			$errors['Date'] = "Enter Date";
+		}
+	
+		if(empty($_FILES['pic']['name'])) {
+			$errors['pic'] = "Please select a file";
+		}
+		
+		if($_FILES['pic']['size'] > MAX_FILE_SIZE) {
+				$errors['pic'] = "File size exceeds maximum. max size: 2mb";
+		}
+
+		#check file format
+		if(!in_array($_FILES['pic']['type'], $ext)) {
+			$errors['pic'] = "File type not supported";
+		}
+
+		#upload files
+		$check = doUpload($_FILES, 'pic', 'uploads/');
+
+		if($check[0]) {
+			$destination = $check[1];
+		} else {
+				$errors['pic'] = "File upload failed";
+		}
+
+
+		if(empty($errors)) {
+			//do database stuff
+			#eliminate unwanted spaces
+			$clean = array_map('trim', $_POST);
+			$stmt = $conn->prepare("INSERT INTO Post(title, content, date_added, filepath) VALUES(:t, :c, :d, :f)");
+	
+			$data = [
+					':t' => $clean['Title'],
+					':c' => $clean['Content'],
+					':d' => $clean['Date'],
+					':f' => $destination
+
+
+			];
+
+			$stmt->execute($data);
+
+		}
+	}
 
 ?>
 
 
-<body>
-	<section>
-		<div class="mast">
-			<h1>T<span>SSB</span></h1>
-			<nav>
-				<ul class="clearfix">
-					<li><a href="#" class="selected">add posts</a></li>
-					<li><a href="#">view posts</a></li>
-					<li><a href="#">view posts</a></li>
-					<li><a href="#">view posts</a></li>
-					<li><a href="#">logout</a></li>
-				</ul>
-			</nav>
-		</div>
-	</section>
-	<div class="wrapper">
-		<div id="stream">
-			
-		</div>
+
+	<h1 id="register-label">Add Post</h1>
+	<hr/>
+
+
+	<form id="register" method="post" action="addpost.php" enctype="multipart/form-data">
+	
+	<div>			
+		<?php displayErrors($errors, 'Title'); ?>
+		<label>Title:</label>
+		<input type="text" name="Title" placeholder="Title"/><br/>
+	</div>
+	
+	<div>
+		<?php displayErrors($errors, 'Content'); ?>	
+		<label>Content:</label>
+		<textarea rows="4" cols="20" type="textfield" name="Content" placeholder="Content"></textarea><br/>
 	</div>
 
-	<section class="foot">
-		<div>
-			<p>&copy; 2016;
-		</div>
-	</section>
-</body>
-</html>
+	<div>
+		<?php displayErrors($errors, 'Date'); ?>
+		<label>Date:</label>
+		<input type="date" name="Date" placeholder="Date"/><br/>
+	</div>
+
+
+	<div>
+		<?php displayErrors($errors, 'pic'); ?>
+		<label>Image:</label>
+		<input type="file" name="pic"/><br/>
+	</div>
+
+
+		<input type="submit" name="add" value="add"/>
+
+	</form>
+	<hr/>
+
+
+
+<?php
+	include 'includes/footer.php'; 
+?>

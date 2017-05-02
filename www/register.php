@@ -68,7 +68,7 @@
 	<div class="wrapper">
 		<h1 id="register-label">Admin Register</h1>
 		<hr>
-		<form id="register"  action ="register.php" method ="POST">
+		<form id="register" action ="register.php" method ="POST">
 			<div>
 				<?php displayErrors($errors, 'fname'); ?>
 				<label>first name:</label>

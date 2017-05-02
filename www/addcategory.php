@@ -2,7 +2,7 @@
 	ob_start();
 	session_start();
 
-	$page_title = "Add Post";
+	$page_title = "Add Category";
 
 	#load db connection
 	include 'includes/db.php';	
@@ -10,8 +10,6 @@
 	#include functions
 	include 'includes/functions.php';
 
-	#check Log in
-	#checkLogin();
 
 	#include header
 	include 'includes/dashboard_header.php';
@@ -21,7 +19,7 @@
 	
 	if(array_key_exists('add', $_POST)) {
 		if(empty($_POST['category_name'])) {
-			$errors['category_name'] = "Enter Product Category Name";
+			$errors['category_name'] = "Enter Blog Category Name";
 		}
 		if(empty($errors)) {
 			#eliminate unwanted spaces
@@ -40,13 +38,13 @@
 	<div id="stream">
 
 
-		<h1 id="register-label">Add Post</h1>
+		<h1 id="register-label">Add Category</h1>
 
-		<form id="register" method="post" action="category.php">
+		<form id="register" method="post" action="addcategory.php">
 
 			<div>
 
-				<label>Post Name: </label>
+				<label>Category Name: </label>
 
 				<?php displayErrors($errors, 'category_name'); ?>
 				<input type="text" name="category_name" placeholder="Category Name">
