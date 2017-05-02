@@ -26,7 +26,7 @@
 	$item = getPostByID($conn, $postID);
 
 	#get item category
-	$category = getCategoryByID($conn, $item['Category_id']);;
+	#$category = getCategoryByID($conn, $item['category_id']);;
 
 
 ?>
@@ -60,7 +60,7 @@
 	<div>
 				<label>Select Category:</label>
 				<select>
-					<option><?php echo $category['category_name']; ?></option>
+					<option></option>
 
 					<?php 
 					

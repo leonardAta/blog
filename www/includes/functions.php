@@ -24,6 +24,10 @@
 		}
 	}
 
+	function redirect($loc, $msg) {
+		header("Location: ".$loc.$msg);
+	}
+
 	function adminLogin($dbconn, $input) {
 		$stmt = $dbconn->prepare("SELECT * FROM Admin WHERE email=:e");
 		$stmt->bindParam(":e", $input["email"]);
@@ -161,6 +165,13 @@
 
 		return $row;
 
+	}
+
+	function deletePost($dbconn, $pstid) {
+		$stmt = $dbconn->prepare("DELETE FROM Post WHERE post_id=:pid");
+		$stmt->bindParam(":pid", $pstid);
+
+		$stmt->execute();
 	}
 
 

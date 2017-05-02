@@ -65,6 +65,7 @@
 			//do database stuff
 			#eliminate unwanted spaces
 			$clean = array_map('trim', $_POST);
+			$clean['Content'] = htmlspecialchars($clean['Content']);
 			$stmt = $conn->prepare("INSERT INTO Post(title, content, date_added, filepath) VALUES(:t, :c, :d, :f)");
 	
 			$data = [
