@@ -1,5 +1,5 @@
 <?php
-
+	
 	#include page title
 	$page_title = "Register";
 
@@ -15,8 +15,8 @@
 	#track errors
 	$errors = [];
 
-	if(array_key_exists("register", $_POST)) {
 
+	if(array_key_exists('register', $_POST)) {
 
 		# validate first name
 		if(empty($_POST['fname'])) {
@@ -55,57 +55,61 @@
 
 			# register Admin
 			adminRegister($conn, $clean);
-
 			
 		}
 
-	}
+
+	} 
 
 ?>
 
 
-	
-	<div class="wrapper">
+<div class="wrapper">
 		<h1 id="register-label">Admin Register</h1>
 		<hr>
-		<form id="register"  action ="register.php" method ="POST">
+		<form id="register" action="register.php" method="POST">
 			<div>
+				
 				<?php displayErrors($errors, 'fname'); ?>
 				<label>first name:</label>
 				<input type="text" name="fname" placeholder="first name">
+
 			</div>
 			<div>
+				
 				<?php displayErrors($errors, 'lname'); ?>
 				<label>last name:</label>	
 				<input type="text" name="lname" placeholder="last name">
 			</div>
 
 			<div>
+				
 				<?php displayErrors($errors, 'email'); ?>
 				<label>email:</label>
 				<input type="text" name="email" placeholder="email">
+
 			</div>
 			<div>
+				
 				<?php displayErrors($errors, 'password'); ?>
 				<label>password:</label>
 				<input type="password" name="password" placeholder="password">
+
 			</div>
- 
 			<div>
-				<?php displayErrors($errors, 'pword'); ?>
+				
+				<?php	displayErrors($errors, 'pword'); ?>
 				<label>confirm password:</label>	
 				<input type="password" name="pword" placeholder="password">
+
 			</div>
 
 			<input type="submit" name="register" value="register">
 		</form>
 
-		<h4 class="jumpto">Already have an account? <a href="login.php">login</a></h4>
+		<h4 class="jumpto">Have an account? <a href="login.php">login</a></h4>
 	</div>
-
 <?php
-
 	#include footer
 	include 'includes/footer.php';
-
 ?>
