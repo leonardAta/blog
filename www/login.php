@@ -52,7 +52,8 @@
 
 			<div>
 				
-				<?php displayErrors($errors, 'email'); ?>				
+				<?php displayErrors($errors, 'email'); ?>
+				
 				<label>email:</label>
 				<input type="text" name="email" placeholder="email">
 			</div>

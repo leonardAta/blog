@@ -26,7 +26,7 @@
 	$item = getPostByID($conn, $postID);
 
 	#get item category
-	fetchCategory($conn, $item['category_id']);
+	$category = getCategoryByID($conn, $item['Category_id']);;
 
 
 ?>
