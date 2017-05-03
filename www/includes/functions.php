@@ -43,12 +43,15 @@
 
 		if(($count != 1) || !password_verify($input['password'], $row['hash'])) {
 			redirect("login.php?msg", "username/password incorrect");
+			
 			exit();
+
 		} else {
 			$result[] = true;
           	$result[] = $row['admin_id'];
-          	redirect("viewpost.php", "");
+          	//redirect("viewpost.php", "");
         }
+
         return $result;
 		
 	}
@@ -173,6 +176,26 @@
 		$stmt->bindParam(":pid", $pstid);
 
 		$stmt->execute();
+	}
+
+	function getAdminByID($dbconn, $aid) {
+		$stmt = $dbconn->prepare("SELECT * FROM Admin WHERE admin_id=:aid");
+		$stmt->bindParam(":aid", $aid);
+
+		$stmt->execute();
+		$row = $stmt->fetch(PDO::FETCH_BOTH);
+
+		return $row;
+	}
+
+	function fetchPost($dbconn, $cb) {
+		$stmt = $dbconn->prepare("SELECT post_id, admin_id, title, content, DATE_FORMAT(date_added, '%M %d %Y') AS dd FROM Post");
+		
+		$stmt->execute();
+		$cb($dbconn, $stmt);
+
+
+
 	}
 
 

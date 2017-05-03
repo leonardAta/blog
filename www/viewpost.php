@@ -2,6 +2,8 @@
 	ob_start();
 	session_start();
 
+	
+
 	$page_title = "View Post";
 
 	#load db connection

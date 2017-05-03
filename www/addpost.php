@@ -66,9 +66,11 @@
 			#eliminate unwanted spaces
 			$clean = array_map('trim', $_POST);
 			$clean['Content'] = htmlspecialchars($clean['Content']);
-			$stmt = $conn->prepare("INSERT INTO Post(title, content, date_added, filepath) VALUES(:t, :c, :d, :f)");
+			$clean['admin_id'] = $_SESSION['admin_id'];
+			$stmt = $conn->prepare("INSERT INTO Post(admin_id, title, content, date_added, filepath) VALUES(:aid, :t, :c, :d, :f)");
 	
 			$data = [
+					':aid' => $clean['admin_id'],
 					':t' => $clean['Title'],
 					':c' => $clean['Content'],
 					':d' => $clean['Date'],
@@ -102,6 +104,18 @@
 		<?php displayErrors($errors, 'Content'); ?>	
 		<label>Content:</label>
 		<textarea rows="4" cols="20" type="textfield" name="Content" placeholder="Content"></textarea><br/>
+
+<!--
+  <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+  <script>tinymce.init({ selector:'textarea' });</script>
+
+
+  <textarea rows="4" cols="5" type="textfield" name="Content" placeholder="Content"></textarea><br/> -->
+
+
+
+
+
 	</div>
 
 	<div>

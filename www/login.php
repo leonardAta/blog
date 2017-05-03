@@ -33,9 +33,10 @@
 			$clean = array_map('trim', $_POST);
 
 			#admin log in function called 
-			adminLogin($conn, $clean);
+			$chk = adminLogin($conn, $clean);
 
-
+			$_SESSION['admin_id'] = $chk[1];
+			redirect("viewpost.php", "");
 		}
 	}
 
