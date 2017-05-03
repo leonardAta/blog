@@ -29,11 +29,10 @@
 		}
 
 		if(empty($errors)) {
-			#do database stuff
 			#eliminate unwanted spaces from values in the $_POST array
 			$clean = array_map('trim', $_POST);
 
-			#$chk = 
+			#admin log in function called 
 			adminLogin($conn, $clean);
 
 
@@ -52,8 +51,7 @@
 
 			<div>
 				
-				<?php displayErrors($errors, 'email'); ?>
-				
+				<?php displayErrors($errors, 'email'); ?>				
 				<label>email:</label>
 				<input type="text" name="email" placeholder="email">
 			</div>

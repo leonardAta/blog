@@ -28,28 +28,29 @@
 		header("Location: ".$loc.$msg);
 	}
 
+
 	function adminLogin($dbconn, $input) {
+		$result = [];
+
 		$stmt = $dbconn->prepare("SELECT * FROM Admin WHERE email=:e");
 		$stmt->bindParam(":e", $input["email"]);
+
 		$stmt->execute();
 
-			$count = $stmt->rowCount();
+		$row = $stmt->fetch(PDO::FETCH_BOTH);
+
+		$count = $stmt->rowCount();
+
+		if(($count != 1) || !password_verify($input['password'], $row['hash'])) {
+			redirect("login.php?msg", "username/password incorrect");
+			exit();
+		} else {
+			$result[] = true;
+          	$result[] = $row['admin_id'];
+          	redirect("viewpost.php", "");
+        }
+        return $result;
 		
-
-		if($count == 1) {
-			$row = $stmt->fetch(PDO::FETCH_ASSOC);
-			if(password_verify($enter['password'], $row['hash'])) {
-				$_SESSION['id'] = $row['Admin'];
-				$_SESSION['email'] = $row['email'];
-
-				header('Location:addpost.php');
-			}
-			else {
-				$error_login = "incorrect email and/or password";
-				header("Location:login.php?error_login=$error_login");
-			}
-		} 
-
 	}
 
 /*	function addPost($dbconn, $add)  {
