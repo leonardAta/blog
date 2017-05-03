@@ -13,7 +13,7 @@
 					<li><a href="addcategory.php">add category</a></li>
 					<li><a href="addpost.php" class="">add post</a></li>
 					<li><a href="viewpost.php">view post</a></li>
-					<li><a href="">logout</a></li>
+					<li><a href="logout.php">logout</a></li>
 				</ul>
 			</nav>
 		</div>
