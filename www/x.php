@@ -1,5 +1,5 @@
 <?php
-  
+
   #insert page title
   $page_title = "Daily Learner: Home";
 
@@ -15,13 +15,18 @@
   #include navigation bar
   include 'includes/nav.php';
 
-
 ?>
 
 
-  <body>
+  <body>  
 
-    <div class="blog-header">
+    <div class="container">
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+
+           <div class="blog-header">
       <div class="container">
         <h1 class="blog-title">The Daily Learner Blog</h1>
         <p class="lead blog-description">A daily journal of a life-long learner and lover of life</p>
@@ -51,10 +56,8 @@
                   }
               });
 
-
-
           ?>
-          
+
           <nav class="blog-pagination">
             <a class="btn btn-outline-primary" href="#">Older</a>
             <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
@@ -98,20 +101,20 @@
 
     </div><!-- /.container -->
 
- <?php
+    <footer class="blog-footer">
+      <p>Blog template built for <a href="https://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </footer>
 
-    #include footer
-    include 'includes/footer.php';
-
- ?>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery-3.2.1.min.js"></script>
-   
+    <script src="js/jquery-3.2.1.min.js"> </script>
+    
     <script src="js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-   
+    
   </body>
 </html>
