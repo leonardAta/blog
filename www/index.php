@@ -17,7 +17,6 @@
 
 ?>
 
-
   <body>  
 
     <div class="container">
@@ -65,66 +64,22 @@
 
         </div><!-- /.blog-main -->
 
-        <div class="col-sm-3 offset-sm-1 blog-sidebar">
-          <div class="sidebar-module sidebar-module-inset">
-            <h4>About</h4>
-            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-          </div>
-          <div class="sidebar-module">
-            <h4>Archives</h4>
+        <?php
 
-            <?php
+          #include sidebar
+          include 'sidebar.php';
 
-            getArchive($conn, function($conn, $stmt) {
+        ?>
+        
+    </div><!-- /.row -->
 
-              while($row=$stmt->fetch(PDO::FETCH_BOTH)) {
-                echo '<ol class="list-unstyled">';
-                echo '<li><a href="archive.php">'.$row["my"].'</a></li>';
-                echo '</ol>';
-              }
+  </div><!-- /.container -->      
 
-            }); {
-
-
-            }
-
-            ?>
-         <!--   <ol class="list-unstyled">
-              <li><a href="#">May 2017</a></li>
-              <li><a href="#">April 2017</a></li>
-              <li><a href="#">March 2017</a></li>
-              <li><a href="#">February 2017</a></li>
-              <li><a href="#">January 2017</a></li>
-              <li><a href="#">December 2016</a></li>
-              <li><a href="#">November 2016</a></li>
-              <li><a href="#">October 2016</a></li>
-              <li><a href="#">September 2016</a></li>
-              <li><a href="#">August 2016</a></li>
-              <li><a href="#">July 2016</a></li>
-              <li><a href="#">June 2016</a></li>
-            </ol>
-        -->
-          </div>
-          <div class="sidebar-module">
-            <h4>Elsewhere</h4>
-            <ol class="list-unstyled">
-              <li><a href="#">GitHub</a></li>
-              <li><a href="#">Twitter</a></li>
-              <li><a href="#">Facebook</a></li>
-            </ol>
-          </div>
-        </div><!-- /.blog-sidebar -->
-
-      </div><!-- /.row -->
-
-    </div><!-- /.container -->
-
-    <footer class="blog-footer">
-      <p>Blog template built for <a href="https://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-      <p>
-        <a href="#">Back to top</a>
-      </p>
-    </footer>
+<?php
+    
+      #include footer
+      include 'includes/blogfooter.php';
+?>
 
 
     <!-- Bootstrap core JavaScript
@@ -135,4 +90,3 @@
     <script src="js/bootstrap.min.js"></script>
     
   </body>
-</html>
