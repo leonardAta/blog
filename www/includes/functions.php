@@ -194,10 +194,15 @@
 		$stmt->execute();
 		$cb($dbconn, $stmt);
 
-
-
 	}
 
+	function getArchive($dbconn, $cb) {
+		$stmt = $dbconn->prepare("SELECT DISTINCT DATE_FORMAT(date_added, '%M, %Y') AS my FROM Post");
+
+		$stmt->execute();
+		$cb($dbconn, $stmt);
+
+	}
 
 
 

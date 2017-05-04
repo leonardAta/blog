@@ -1,5 +1,5 @@
 <?php
-  
+
   #insert page title
   $page_title = "Daily Learner: Home";
 
@@ -15,13 +15,18 @@
   #include navigation bar
   include 'includes/nav.php';
 
-
 ?>
 
 
-  <body>
+  <body>  
 
-    <div class="blog-header">
+    <div class="container">
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+
+           <div class="blog-header">
       <div class="container">
         <h1 class="blog-title">The Daily Learner Blog</h1>
         <p class="lead blog-description">A daily journal of a life-long learner and lover of life</p>
@@ -51,10 +56,8 @@
                   }
               });
 
-
-
           ?>
-          
+
           <nav class="blog-pagination">
             <a class="btn btn-outline-primary" href="#">Older</a>
             <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
@@ -69,20 +72,38 @@
           </div>
           <div class="sidebar-module">
             <h4>Archives</h4>
-            <ol class="list-unstyled">
-              <li><a href="#">March 2014</a></li>
-              <li><a href="#">February 2014</a></li>
-              <li><a href="#">January 2014</a></li>
-              <li><a href="#">December 2013</a></li>
-              <li><a href="#">November 2013</a></li>
-              <li><a href="#">October 2013</a></li>
-              <li><a href="#">September 2013</a></li>
-              <li><a href="#">August 2013</a></li>
-              <li><a href="#">July 2013</a></li>
-              <li><a href="#">June 2013</a></li>
-              <li><a href="#">May 2013</a></li>
-              <li><a href="#">April 2013</a></li>
+
+            <?php
+
+            getArchive($conn, function($conn, $stmt) {
+
+              while($row=$stmt->fetch(PDO::FETCH_BOTH)) {
+                echo '<ol class="list-unstyled">';
+                echo '<li><a href="archive.php">'.$row["my"].'</a></li>';
+                echo '</ol>';
+              }
+
+            }); {
+
+
+            }
+
+            ?>
+         <!--   <ol class="list-unstyled">
+              <li><a href="#">May 2017</a></li>
+              <li><a href="#">April 2017</a></li>
+              <li><a href="#">March 2017</a></li>
+              <li><a href="#">February 2017</a></li>
+              <li><a href="#">January 2017</a></li>
+              <li><a href="#">December 2016</a></li>
+              <li><a href="#">November 2016</a></li>
+              <li><a href="#">October 2016</a></li>
+              <li><a href="#">September 2016</a></li>
+              <li><a href="#">August 2016</a></li>
+              <li><a href="#">July 2016</a></li>
+              <li><a href="#">June 2016</a></li>
             </ol>
+        -->
           </div>
           <div class="sidebar-module">
             <h4>Elsewhere</h4>
@@ -98,20 +119,20 @@
 
     </div><!-- /.container -->
 
- <?php
+    <footer class="blog-footer">
+      <p>Blog template built for <a href="https://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </footer>
 
-    #include footer
-    include 'includes/footer.php';
-
- ?>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery-3.2.1.min.js"></script>
-   
+    <script src="js/jquery-3.2.1.min.js"> </script>
+    
     <script src="js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-   
+    
   </body>
 </html>
