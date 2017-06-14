@@ -58,20 +58,19 @@
 	</div>
 
 	<div>
-				<label>Select Category:</label>
-				<select>
-					<option></option>
+		<label>Select Category:</label>
+		<select>
+		<option></option>
 
-					<?php 
+		<?php 
 					
-					$choose = fetchCategory($conn, $cat_name['category_name']);
+			$choose = fetchCategory($conn, $cat_name['category_name']);
+			echo $choose;
 
-					echo $choose;
+		?>
 
-					?>
-
-				</select>
-			</div>
+		</select>
+	</div>
 
 
 		<input type="submit" name="" value="add"/>

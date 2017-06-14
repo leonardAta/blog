@@ -70,7 +70,7 @@
 			$stmt = $conn->prepare("INSERT INTO Post(admin_id, title, content, date_added, filepath) VALUES(:aid, :t, :c, :d, :f)");
 	
 			$data = [
-					':aid' => $clean['admin_id']
+					':aid' => $clean['admin_id'],
 					':t' => $clean['Title'],
 					':c' => $clean['Content'],
 					':d' => $clean['Date'],

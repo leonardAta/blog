@@ -38,7 +38,6 @@
 		$stmt->execute();
 
 		$row = $stmt->fetch(PDO::FETCH_BOTH);
-
 		$count = $stmt->rowCount();
 
 		if(($count != 1) || !password_verify($input['password'], $row['hash'])) {
@@ -49,7 +48,6 @@
 		} else {
 			$result[] = true;
           	$result[] = $row['admin_id'];
-          	//redirect("viewpost.php", "");
         }
 
         return $result;
@@ -93,6 +91,7 @@
 
 		$stmt = $dbconn->prepare("SELECT * FROM Post");
 		$stmt->execute();
+
 		while($row = $stmt->fetch(PDO::FETCH_BOTH)) {
 			$post_id = $row['post_id'];
 			$title = $row['title'];
@@ -101,7 +100,8 @@
 
 			$result = '<tr><td>'.$row['post_id'].'</td>';
 			$result .='<td>'.$row['title'].'</td>';
-			$result .='<td>'.$row['content'].'<td>';
+			$result .='<td>'.$row['content'].'</td>';
+			$result .='<td>'.$row['date_added'].'</td>';
 			$result .= '<td><a href="editpost.php?post_id='.$row['post_id'].'">edit</a></td>';
 			$result .= '<td><a href="deletepost.php?post_id='.$row['post_id'].'">delete</a></td></tr>';
 		}
@@ -200,6 +200,16 @@
 		$stmt = $dbconn->prepare("SELECT DISTINCT DATE_FORMAT(date_added, '%M, %Y') AS my FROM Post");
 
 		$stmt->execute();
+		$cb($dbconn, $stmt);
+
+	}
+
+	function getPostByDate($dbconn, $cb) {
+		$stmt = $dbconn->prepare("SELECT post_id, admin_id, title, content, DATE_FORMAT(date_added, '%M, %Y') AS arch_date FROM Post");
+		#$stmt->bindParam(":date_id", $dateIdentity);
+
+		$stmt->execute();
+
 		$cb($dbconn, $stmt);
 
 	}
