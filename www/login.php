@@ -3,19 +3,14 @@
 	ob_start();
 	session_start();
 
-	#page title
 	$page_title = "Admin Log in";
 
-	#include header
 	include 'includes/header.php';
 
-	#include database
 	include 'includes/db.php';
 
-	#include functions
 	include 'includes/functions.php';
 
-	#track errors
 	$errors = [];
 
 	if(array_key_exists('register', $_POST)) {
