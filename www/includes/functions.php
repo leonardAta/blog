@@ -9,7 +9,7 @@
 			":ln" =>$input['lname'],
 			":e" =>$input['email'],
 			"h" =>$input['password']
-
+		
 
 		];
 		$stmt->execute($data);
