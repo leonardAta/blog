@@ -19,7 +19,7 @@
 	
 	if(array_key_exists('add', $_POST)) {
 		if(empty($_POST['category_name'])) {
-			$errors['category_name'] = "Enter Blog Category Name";
+			$errors['category_name'] = "Enter Category Name";
 		}
 		if(empty($errors)) {
 			#eliminate unwanted spaces
@@ -33,10 +33,8 @@
 ?>
 
 
-
 <div class="wrapper">
 	<div id="stream">
-
 
 		<h1 id="register-label">Add Category</h1>
 
